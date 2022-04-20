@@ -80,3 +80,36 @@ let questions = [
         'right_answer' : 2,
     },
 ]
+
+let currentQuestion = 0;
+
+function init() {
+    document.getElementById('questions-sum').innerHTML = questions.length;
+
+    showQuestion();
+}
+
+function showQuestion() {
+    let question = questions[currentQuestion];
+
+    document.getElementById('question-txt').innerHTML = question['question'];
+    document.getElementById('answer_1').innerHTML = question['answer_1'];
+    document.getElementById('answer_2').innerHTML = question['answer_2'];
+    document.getElementById('answer_3').innerHTML = question['answer_3'];
+    document.getElementById('answer_4').innerHTML = question['answer_4'];
+}
+
+
+function answer(selection) { /* selection = da variabel je nach Klick answer_1... answer_2 etc ankommt */
+    let question = questions[currentQuestion];
+    console.log('Selected answer is ', selection); // um zu sehen welche answer von hmtl übergeben wurde an JS
+    let selectedQuestionNumber = selection.slice(-1); //um die letzte stelle von answer_3 (String zu erhalten) = 3
+    console.log('Current question is ', question['right_answer']);
+    console.log('selectedQuestionNumber is ', selectedQuestionNumber);
+
+    if (selectedQuestionNumber == question['right_answer']) { //vergleicht die Zahl der SELECTION mit RIGHT ANSWER zahl.
+        console.log('richtige Antwort');
+    }else{
+        console.log('falsche Antwort');
+    } 
+}

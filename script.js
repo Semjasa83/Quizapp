@@ -109,7 +109,9 @@ function answer(selection) { /* selection = da variabel je nach Klick answer_1..
 
     if (selectedQuestionNumber == question['right_answer']) { //vergleicht die Zahl der SELECTION mit RIGHT ANSWER zahl.
         console.log('richtige Antwort');
+        document.getElementById(selection).classList.add('success-bgr');
     }else{
         console.log('falsche Antwort');
+        document.getElementById(selection).classList.add('wrong-bgr');
     } 
 }

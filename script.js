@@ -97,24 +97,25 @@ function showQuestion() {
     document.getElementById('answer_2').innerHTML = question['answer_2'];
     document.getElementById('answer_3').innerHTML = question['answer_3'];
     document.getElementById('answer_4').innerHTML = question['answer_4'];
+    document.getElementById('next-question-button').disabled = true; // button zu Beginn deaktivieren
 }
 
 
 function answer(selection) { /* selection = da variabel je nach Klick answer_1... answer_2 etc ankommt */
     let question = questions[currentQuestion];
-    console.log('Selected answer is ', selection); // um zu sehen welche answer von hmtl übergeben wurde an JS
+    // console.log('Selected answer is ', selection); // um zu sehen welche answer von hmtl übergeben wurde an JS
     let selectedQuestionNumber = selection.slice(-1); //um die letzte stelle von answer_3 (String zu erhalten) = 3
-    console.log('Current question is ', question['right_answer']);
-    console.log('selectedQuestionNumber is ', selectedQuestionNumber);
-
+    // console.log('Current question is ', question['right_answer']);
+    // console.log('selectedQuestionNumber is ', selectedQuestionNumber);
     let idOfRightAnswer = `answer_${question['right_answer']}`; //question['right_answer'] damit er die Zahl bei jeder Frage korrekt vergleichen kann mit dem Zahlenwert
 
     if (selectedQuestionNumber == question['right_answer']) { //vergleicht die Zahl der SELECTION mit RIGHT ANSWER zahl.
-        console.log('richtige Antwort');
+        // console.log('richtige Antwort');
         document.getElementById(selection).classList.add('success-bgr'); // wenn korrekt, dann Grün
     }else{
-        console.log('falsche Antwort');
+        // console.log('falsche Antwort');
         document.getElementById(selection).classList.add('wrong-bgr'); // wenn falsch, rot und korrekte in grün
         document.getElementById(idOfRightAnswer).classList.add('success-bgr');
     } 
+    document.getElementById('next-question-button').disabled = false; //Button nach Antwort wieder aktivieren
 }

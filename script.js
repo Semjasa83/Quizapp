@@ -107,11 +107,14 @@ function answer(selection) { /* selection = da variabel je nach Klick answer_1..
     console.log('Current question is ', question['right_answer']);
     console.log('selectedQuestionNumber is ', selectedQuestionNumber);
 
+    let idOfRightAnswer = `answer_${question['right_answer']}`; //question['right_answer'] damit er die Zahl bei jeder Frage korrekt vergleichen kann mit dem Zahlenwert
+
     if (selectedQuestionNumber == question['right_answer']) { //vergleicht die Zahl der SELECTION mit RIGHT ANSWER zahl.
         console.log('richtige Antwort');
-        document.getElementById(selection).classList.add('success-bgr');
+        document.getElementById(selection).classList.add('success-bgr'); // wenn korrekt, dann Grün
     }else{
         console.log('falsche Antwort');
-        document.getElementById(selection).classList.add('wrong-bgr');
+        document.getElementById(selection).classList.add('wrong-bgr'); // wenn falsch, rot und korrekte in grün
+        document.getElementById(idOfRightAnswer).classList.add('success-bgr');
     } 
 }

@@ -90,6 +90,13 @@ function init() {
 }
 
 function showQuestion() {
+
+    if(currentQuestion >= questions.length) {
+        // TODO: Show End Screen
+        document.getElementById('end-screen').style = ''; // style = '' um das Display None zu entfernen
+        document.getElementById('question-body').style = 'display: none'; 
+    } else {
+
     let question = questions[currentQuestion];
 
     document.getElementById('question-txt').innerHTML = question['question'];
@@ -99,7 +106,9 @@ function showQuestion() {
     document.getElementById('answer_4').innerHTML = question['answer_4'];
     document.getElementById('next-question-button').disabled = true; // button zu Beginn deaktivieren
     document.getElementById('question-atm').innerHTML = currentQuestion +1;
+    }        
 }
+
 
 
 function answer(selection) { /* selection = da variabel je nach Klick answer_1... answer_2 etc ankommt */

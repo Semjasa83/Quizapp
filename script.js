@@ -98,6 +98,7 @@ function showQuestion() {
     document.getElementById('answer_3').innerHTML = question['answer_3'];
     document.getElementById('answer_4').innerHTML = question['answer_4'];
     document.getElementById('next-question-button').disabled = true; // button zu Beginn deaktivieren
+    document.getElementById('question-atm').innerHTML = currentQuestion +1;
 }
 
 
@@ -118,4 +119,22 @@ function answer(selection) { /* selection = da variabel je nach Klick answer_1..
         document.getElementById(idOfRightAnswer).classList.add('success-bgr');
     } 
     document.getElementById('next-question-button').disabled = false; //Button nach Antwort wieder aktivieren
+}
+
+function nextQuestion() {
+    currentQuestion++; //z.B. von 0 auf 1 in Questions springen
+    resetAnswerButtons(); //sollte vor showQuestions ausgeführt werden
+    showQuestion();
+
+}
+
+function resetAnswerButtons() {
+    document.getElementById('answer_1').classList.remove('success-bgr');
+    document.getElementById('answer_1').classList.remove('wrong-bgr');
+    document.getElementById('answer_2').classList.remove('success-bgr');
+    document.getElementById('answer_2').classList.remove('wrong-bgr');
+    document.getElementById('answer_3').classList.remove('success-bgr');
+    document.getElementById('answer_3').classList.remove('wrong-bgr');
+    document.getElementById('answer_4').classList.remove('success-bgr');
+    document.getElementById('answer_4').classList.remove('wrong-bgr');
 }

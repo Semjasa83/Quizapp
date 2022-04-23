@@ -86,33 +86,49 @@ let currentQuestion = 0; //damit die aktuelle Fragen bei 0 beginnen
 let AUDIO_SUCCESS = new Audio('audio/success.mp3');
 let AUDIO_FAIL = new Audio('audio/wrong.wav');
 
+
 function init() {
     document.getElementById('questions-sum').innerHTML = questions.length;
-
     showQuestion();
 }
 
+
 function showQuestion() {
-
-    if(currentQuestion >= questions.length) {
-        //show Endscreen
-        document.getElementById('end-screen').style = ''; // style = '' um das Display None zu entfernen
-        document.getElementById('question-body').style = 'display: none';
-        
-        document.getElementById('amount-of-questions').innerHTML = questions.length; // Endscreen gesamte Menge der Fragen
-        document.getElementById('amount-of-right-questions').innerHTML = rightQuestions; // Menge der korrekten Antworten am Endscreen
-        document.getElementById('header-image').src = 'img/winner.jpg'
+    if(gameIsOver()) {
+        showEndScreen();
     } else {
-        //show Question
+        updateProgressBar();
+        updateToNextQuestion();
+    }        
+}
 
+
+function gameIsOver() {
+    return currentQuestion >= questions.length;
+}
+
+
+function showEndScreen() {
+    document.getElementById('end-screen').style = ''; // style = '' um das Display None zu entfernen
+    document.getElementById('question-body').style = 'display: none';
+    
+    document.getElementById('amount-of-questions').innerHTML = questions.length; // Endscreen gesamte Menge der Fragen
+    document.getElementById('amount-of-right-questions').innerHTML = rightQuestions; // Menge der korrekten Antworten am Endscreen
+    document.getElementById('header-image').src = 'img/winner.jpg'
+}
+
+
+function updateProgressBar() {
     let percent =  (currentQuestion + 1) /questions.length; //+1 damit die Leiste korrekt startet und endet.
     percent = Math.round(percent * 100); //math.round(...)rundet die Zahlen
     document.getElementById('progress-bar').innerHTML = `${percent}%`; // ${}immer bei Strings
     document.getElementById('progress-bar').style = `width: ${percent}%;`; //style = `width ` -> statt style.width, geht sonst nicht
     // console.log(`Fortschritt:`, percent);
-        
-    let question = questions[currentQuestion];
+}
 
+
+function updateToNextQuestion() {
+    let question = questions[currentQuestion];
     document.getElementById('question-txt').innerHTML = question['question'];
     document.getElementById('answer_1').innerHTML = question['answer_1'];
     document.getElementById('answer_2').innerHTML = question['answer_2'];
@@ -120,26 +136,23 @@ function showQuestion() {
     document.getElementById('answer_4').innerHTML = question['answer_4'];
     document.getElementById('next-question-button').disabled = true; // button zu Beginn deaktivieren
     document.getElementById('question-atm').innerHTML = currentQuestion +1;
-    }        
 }
 
 
-
-function answer(selection) { /* selection = da variabel je nach Klick answer_1... answer_2 etc ankommt */
-    let question = questions[currentQuestion];
-    // console.log('Selected answer is ', selection); // um zu sehen welche answer von hmtl übergeben wurde an JS
+function answer(selection) {        // selection = da variabel je nach Klick answer_1... answer_2 etc ankommt 
+    let question = questions[currentQuestion]; // console.log('Selected answer is ', selection); // um zu sehen welche answer von hmtl übergeben wurde an JS                             
     let selectedQuestionNumber = selection.slice(-1); //um die letzte stelle von answer_3 (String zu erhalten) = 3
-    // console.log('Current question is ', question['right_answer']);
-    // console.log('selectedQuestionNumber is ', selectedQuestionNumber);
+                                    // console.log('Current question is ', question['right_answer']);
+                                    // console.log('selectedQuestionNumber is ', selectedQuestionNumber);
     let idOfRightAnswer = `answer_${question['right_answer']}`; //question['right_answer'] damit er die Zahl bei jeder Frage korrekt vergleichen kann mit dem Zahlenwert
-
-    if (selectedQuestionNumber == question['right_answer']) { //vergleicht die Zahl der SELECTION mit RIGHT ANSWER zahl.
-        // console.log('richtige Antwort');
+    
+    if (rightAnswerSelected(selectedQuestionNumber)) {   //vergleicht die Zahl der SELECTION mit RIGHT ANSWER zahl.
+                                                                // console.log('richtige Antwort');
         document.getElementById(selection).classList.add('success-bgr'); // wenn korrekt, dann Grün
         AUDIO_SUCCESS.play();
         rightQuestions++;
     }else{
-        // console.log('falsche Antwort');
+                                                                // console.log('falsche Antwort');
         document.getElementById(selection).classList.add('wrong-bgr'); // wenn falsch, rot und korrekte in grün
         document.getElementById(idOfRightAnswer).classList.add('success-bgr');
         AUDIO_FAIL.play();
@@ -147,12 +160,18 @@ function answer(selection) { /* selection = da variabel je nach Klick answer_1..
     document.getElementById('next-question-button').disabled = false; //Button nach Antwort wieder aktivieren
 }
 
+function rightAnswerSelected(selectedQuestionNumber) { // wird in ZEILE 158 und hier benötigt, damit es hier übergeben wird und ausgeführt werden kann!!!!!!
+   return selectedQuestionNumber == question['right_answer']; //selectedQuestionNumber kann hier auch in der Function anderst benannt werden... ist dennoch mit oben verknüpft
+}
+
+
 function nextQuestion() {
-    currentQuestion++; //z.B. von 0 auf 1 in Questions springen
-    resetAnswerButtons(); //sollte vor showQuestions ausgeführt werden
+    currentQuestion++;              //z.B. von 0 auf 1 in Questions springen
+    resetAnswerButtons();           //sollte vor showQuestions ausgeführt werden
     showQuestion();
 
 }
+
 
 function resetAnswerButtons() {
     document.getElementById('answer_1').classList.remove('success-bgr');
@@ -165,14 +184,13 @@ function resetAnswerButtons() {
     document.getElementById('answer_4').classList.remove('wrong-bgr');
 }
 
+
 function restartGame() {
     document.getElementById('header-image').src = 'img/background2.jpg'; // Bild zurückwechseln
     document.getElementById('end-screen').style = 'display: none'; // Endscreen wieder ausblenden
     document.getElementById('question-body').style = ''; // Questions wieder anzeigen
 
-
     rightQuestions = 0;
     currentQuestion = 0;
     init();
-
 }

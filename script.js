@@ -162,3 +162,15 @@ function resetAnswerButtons() {
     document.getElementById('answer_4').classList.remove('success-bgr');
     document.getElementById('answer_4').classList.remove('wrong-bgr');
 }
+
+function restartGame() {
+    document.getElementById('header-image').src = 'img/background2.jpg'; // Bild zurückwechseln
+    document.getElementById('end-screen').style = 'display: none'; // Endscreen wieder ausblenden
+    document.getElementById('question-body').style = ''; // Questions wieder anzeigen
+
+
+    rightQuestions = 0;
+    currentQuestion = 0;
+    init();
+
+}

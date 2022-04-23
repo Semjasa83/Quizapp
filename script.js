@@ -82,9 +82,9 @@ let questions = [
 ]
 
 let rightQuestions = 0;
-
 let currentQuestion = 0; //damit die aktuelle Fragen bei 0 beginnen
-
+let AUDIO_SUCCESS = new Audio('audio/success.mp3');
+let AUDIO_FAIL = new Audio('audio/wrong.wav');
 
 function init() {
     document.getElementById('questions-sum').innerHTML = questions.length;
@@ -136,11 +136,13 @@ function answer(selection) { /* selection = da variabel je nach Klick answer_1..
     if (selectedQuestionNumber == question['right_answer']) { //vergleicht die Zahl der SELECTION mit RIGHT ANSWER zahl.
         // console.log('richtige Antwort');
         document.getElementById(selection).classList.add('success-bgr'); // wenn korrekt, dann Grün
+        AUDIO_SUCCESS.play();
         rightQuestions++;
     }else{
         // console.log('falsche Antwort');
         document.getElementById(selection).classList.add('wrong-bgr'); // wenn falsch, rot und korrekte in grün
         document.getElementById(idOfRightAnswer).classList.add('success-bgr');
+        AUDIO_FAIL.play();
     } 
     document.getElementById('next-question-button').disabled = false; //Button nach Antwort wieder aktivieren
 }

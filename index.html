@@ -29,6 +29,11 @@
         <div class="card quizcard">
             <img src="img/background2.jpg" id="header-image" class="card-img-top card-img-custom">
 
+            <div class="progress">
+                <!--style= width auf 0% ändern, damit es optisch bei 0 startet-->
+                <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+              </div>
+
             <div class="card-body" id="end-screen" style="display: none;">
                 <div class="text-center winner-header">Quiz beendet!</div>
                 <div class="text-center">Du hast <b id="amount-of-right-questions"></b> Fragen von <b id="amount-of-questions">xxx</b> richtig beantwortet.</div>

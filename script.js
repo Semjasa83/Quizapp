@@ -95,6 +95,7 @@ function init() {
 function showQuestion() {
 
     if(currentQuestion >= questions.length) {
+        //show Endscreen
         document.getElementById('end-screen').style = ''; // style = '' um das Display None zu entfernen
         document.getElementById('question-body').style = 'display: none';
         
@@ -102,7 +103,14 @@ function showQuestion() {
         document.getElementById('amount-of-right-questions').innerHTML = rightQuestions; // Menge der korrekten Antworten am Endscreen
         document.getElementById('header-image').src = 'img/winner.jpg'
     } else {
+        //show Question
 
+    let percent =  (currentQuestion + 1) /questions.length; //+1 damit die Leiste korrekt startet und endet.
+    percent = Math.round(percent * 100); //math.round(...)rundet die Zahlen
+    document.getElementById('progress-bar').innerHTML = `${percent}%`; // ${}immer bei Strings
+    document.getElementById('progress-bar').style = `width: ${percent}%;`; //style = `width ` -> statt style.width, geht sonst nicht
+    // console.log(`Fortschritt:`, percent);
+        
     let question = questions[currentQuestion];
 
     document.getElementById('question-txt').innerHTML = question['question'];

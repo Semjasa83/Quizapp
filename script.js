@@ -161,7 +161,7 @@ function answer(selection) {        // selection = da variabel je nach Klick ans
 }
 
 function rightAnswerSelected(selectedQuestionNumber) { // wird in ZEILE 158 und hier benötigt, damit es hier übergeben wird und ausgeführt werden kann!!!!!!
-   return selectedQuestionNumber == question['right_answer']; //selectedQuestionNumber kann hier auch in der Function anderst benannt werden... ist dennoch mit oben verknüpft
+   return selectedQuestionNumber == questions[currentQuestion]['right_answer']; //selectedQuestionNumber kann hier auch in der Function anderst benannt werden... ist dennoch mit oben verknüpft
 }
 
 

@@ -15,8 +15,12 @@ body {
 }
 
 .card-img-custom {
-    height: 25vh;
     object-fit: cover;
+}
+
+.winner-header {
+    font-size: 32px;
+    margin-bottom: 8px;
 }
 
 .question-footer {
@@ -46,3 +50,4 @@ body {
 .text-center {
     text-align: center;
 }
+

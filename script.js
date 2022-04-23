@@ -95,12 +95,12 @@ function init() {
 function showQuestion() {
 
     if(currentQuestion >= questions.length) {
-        // TODO: Show End Screen
         document.getElementById('end-screen').style = ''; // style = '' um das Display None zu entfernen
         document.getElementById('question-body').style = 'display: none';
         
         document.getElementById('amount-of-questions').innerHTML = questions.length; // Endscreen gesamte Menge der Fragen
         document.getElementById('amount-of-right-questions').innerHTML = rightQuestions; // Menge der korrekten Antworten am Endscreen
+        document.getElementById('header-image').src = 'img/winner.jpg'
     } else {
 
     let question = questions[currentQuestion];

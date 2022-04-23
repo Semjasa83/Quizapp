@@ -81,7 +81,10 @@ let questions = [
     },
 ]
 
-let currentQuestion = 0;
+let rightQuestions = 0;
+
+let currentQuestion = 0; //damit die aktuelle Fragen bei 0 beginnen
+
 
 function init() {
     document.getElementById('questions-sum').innerHTML = questions.length;
@@ -96,7 +99,8 @@ function showQuestion() {
         document.getElementById('end-screen').style = ''; // style = '' um das Display None zu entfernen
         document.getElementById('question-body').style = 'display: none';
         
-        document.getElementById('amount-of-questions').innerHTML = questions.length;
+        document.getElementById('amount-of-questions').innerHTML = questions.length; // Endscreen gesamte Menge der Fragen
+        document.getElementById('amount-of-right-questions').innerHTML = rightQuestions; // Menge der korrekten Antworten am Endscreen
     } else {
 
     let question = questions[currentQuestion];
@@ -124,6 +128,7 @@ function answer(selection) { /* selection = da variabel je nach Klick answer_1..
     if (selectedQuestionNumber == question['right_answer']) { //vergleicht die Zahl der SELECTION mit RIGHT ANSWER zahl.
         // console.log('richtige Antwort');
         document.getElementById(selection).classList.add('success-bgr'); // wenn korrekt, dann Grün
+        rightQuestions++;
     }else{
         // console.log('falsche Antwort');
         document.getElementById(selection).classList.add('wrong-bgr'); // wenn falsch, rot und korrekte in grün

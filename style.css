@@ -56,3 +56,17 @@ body {
     justify-content: center;
     margin-top: 24px;
 }
+
+@media (max-width:520px) {
+    body {
+        background-color: #F8F9FA !important;
+    }
+    .container {
+     padding-left: 0 !important;
+     padding-right: 0 !important;
+     background-color: #F8F9FA !important;
+    }
+    .quizcard {
+        width: 100%;
+    }
+}

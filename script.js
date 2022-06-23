@@ -109,6 +109,8 @@ function gameIsOver() {
 
 
 function showEndScreen() {
+    document.getElementById('progress-bar').innerHTML = '100%';
+    document.getElementById('progress-bar').style = 'width: 100%';
     document.getElementById('end-screen').style = ''; // style = '' um das Display None zu entfernen
     document.getElementById('question-body').style = 'display: none';
     
@@ -119,7 +121,7 @@ function showEndScreen() {
 
 
 function updateProgressBar() {
-    let percent =  (currentQuestion + 1) /questions.length; //+1 damit die Leiste korrekt startet und endet.
+    let percent =  (currentQuestion) /questions.length; //+1 damit die Leiste korrekt startet und endet.
     percent = Math.round(percent * 100); //math.round(...)rundet die Zahlen
     document.getElementById('progress-bar').innerHTML = `${percent}%`; // ${}immer bei Strings
     document.getElementById('progress-bar').style = `width: ${percent}%;`; //style = `width ` -> statt style.width, geht sonst nicht
@@ -151,8 +153,7 @@ function answer(selection) {        // selection = da variabel je nach Klick ans
         document.getElementById(selection).classList.add('success-bgr'); // wenn korrekt, dann Grün
         AUDIO_SUCCESS.play();
         rightQuestions++;
-    }else{
-                                                                // console.log('falsche Antwort');
+    }else{ // console.log('falsche Antwort');                                                     
         document.getElementById(selection).classList.add('wrong-bgr'); // wenn falsch, rot und korrekte in grün
         document.getElementById(idOfRightAnswer).classList.add('success-bgr');
         AUDIO_FAIL.play();
